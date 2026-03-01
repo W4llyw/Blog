@@ -42,3 +42,25 @@ Ok a 32bit executable built written in C#
 
 
 #### dnSpy
+Ok this is where we really get into things [dnSpy](https://github.com/dnSpy/dnSpy) is a debugger, decompiler, and a .NET/Unity assembly editor. Perfect for diving into this malware.
+
+Initially looking at dnSpy it is pretty overwhelming and took some research on where I should look first.
+
+![dnSpy](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/dnSpy.png)
+
+Well it was pretty straightforward actually seems like the best place to start was called the Entry Point. See the Entry Point is the very first instruction that executes in a process. This is where the Operating System gives control to the application so it can start performing these instructions that the Entry Point points to.
+
+![Entry Point](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Entry%20Point.png)
+
+This led to `Client`, which contained `Settings` and I noticed something that was in the original blog post I referenced earlier.
+
+![Client to Settings](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Client%20to%20Settings.png)
+
+Within `Settings` there is a method called `InitilizeSettings()`, this basically contains the hardcoded config for the malware which is encrypted before execution to avoid detection via static analysis.
+
+![InitializeSettings](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/InitializeSettings.png)
+
+![Encrypted Variables](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Encrypted%20Variables.png)
+
+The use of the `InitializeSettings` method is a somewhat ingenious technique, it serves two purposes the first is that it doesn't require the process to rely on an external .config file which makes its footprint smaller and the second is to decrypt these hardcoded configs the malware would have to be ran.
+
