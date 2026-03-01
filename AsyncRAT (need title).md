@@ -97,7 +97,10 @@ One thing I did notice in the decrypted settings is that the `Anti` field is `fa
 
 ![AntiAnalysis](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/AntiAnalysis.png)
 
-If any of these return true the process precedes to a method called `FakeErrorMessage()` which pops up a message box with a fake error message then executes `SelfDestruct.Melt()`. This method deletes the .bat file, kills the malware's process, deletes the malware's current working path, and deletes the DotNetZip.dll. 
+If any of these return true the process precedes to a method called `FakeErrorMessage()` which pops up a message box with a fake error message then executes `SelfDestruct.Melt()`. This method deletes the .bat file, kills the malware's process, deletes the malware's current working path, and deletes the DotNetZip.dll. Which this variant wouldn't have except for the running process and the install location which we know is `%APPDATA%` from the `InitializeSettings` method.
 
 Self Destruction:
 ![Melt](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Melt.png)
+
+### The offensive (need title)
+
