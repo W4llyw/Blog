@@ -24,3 +24,19 @@ The [Malware Bazaar](https://bazaar.abuse.ch) is just that place. I searched for
 
 
 ### The Analysis
+
+#### Strings
+Before diving into the code with a decompiler I figured I would look at it from a very high point of view via [Strings](https://learn.microsoft.com/en-us/sysinternals/downloads/strings). 
+
+During my search through the malware's strings some very interesting things jumped out to me, most notably the strings TelegramToken and TelegramChatID. I knew that the sample of AsyncRAT I found would be different than the one found in the [this](https://blog.qualys.com/vulnerabilities-threat-research/2022/08/16/asyncrat-c2-framework-overview-technical-analysis-and-detection) post (which was what made me want to look further into AsyncRAT) but the mention of a telegram ID was a big surprise!
+
+![Strings Findings](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Strings.png)
+
+
+#### PEStudio
+I needed to know what this thing was built with so I can dissect it using the proper tool. 
+In comes [PEStudio](https://www.winitor.com) it can identify a multitude of things for initial static malware analysis, but I just needed it to identify what my sample was made with.
+Ok a 32bit executable built written in C#
+
+![PEStudio](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Pestudio%20info.png)
+
