@@ -79,7 +79,7 @@ Discord and Telegram token theft:
 Sending Keylogger logs to Telegram:
 ![Exfil of Keylogger](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Sending%20Keylogging%20to%20Telegram.png)
 
-Ok so now I am 100% sure this is an info stealer and I notinced in the `InitializeSettings` method there were two fields that referenced Telegram: `TelegramChatID` and `TelegramToken`. But they are encrypted which means I would need to run the malware to see the decrypted data.
+Ok so now I am 100% sure this is an info stealer and I noticed in the `InitializeSettings` method there were two fields that referenced Telegram: `TelegramChatID` and `TelegramToken`. But they are encrypted which means I would need to run the malware to see the decrypted data.
 
 In comes dnSpy once again to save the day, I can "partially" run the malware in dnSpy by setting a breakpoint and view what the process has done up unto that point in memory.I set the breakpoint to the return at the very bottom of the `InitializeSettings` method, then run the debugger.
 
@@ -92,3 +92,12 @@ And there they all are, all the variables in cleartext!
 Decrypted malware config variables:
 ![Fields Decrypted](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/all%20variables%20decrypted.png)
 
+There is some very juicy info here but we will and will keep moving and looking more into the malware sample. 
+One thing I did notice in the decrypted settings is that the `Anti` field is `false` (which would have made this analysis a lot more difficult). This was the anti analysis method that is seen in other AsyncRAT samples and even though this is a modified version of AsyncRAT it still contained the `AntiAnalysis` method, which I took an interest in and thought it should at least be brought up here. It checks for a multitude of things like static analysis tools, weather it is sand boxed or not, and if it's being ran in hypervisor such as VirtualBox or VMware.
+
+![AntiAnalysis](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/AntiAnalysis.png)
+
+If any of these return true the process precedes to a method called `FakeErrorMessage()` which pops up a message box with a fake error message then executes `SelfDestruct.Melt()`. This method deletes the .bat file, kills the malware's process, deletes the malware's current working path, and deletes the DotNetZip.dll. 
+
+Self Destruction:
+![Melt](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Melt.png)
