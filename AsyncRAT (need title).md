@@ -79,4 +79,16 @@ Discord and Telegram token theft:
 Sending Keylogger logs to Telegram:
 ![Exfil of Keylogger](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Sending%20Keylogging%20to%20Telegram.png)
 
-Ok so now 
+Ok so now I am 100% sure this is an info stealer and I notinced in the `InitializeSettings` method there were two fields that referenced Telegram: `TelegramChatID` and `TelegramToken`. But they are encrypted which means I would need to run the malware to see the decrypted data.
+
+In comes dnSpy once again to save the day, I can "partially" run the malware in dnSpy by setting a breakpoint and view what the process has done up unto that point in memory.I set the breakpoint to the return at the very bottom of the `InitializeSettings` method, then run the debugger.
+
+Setting the Breakpoint:
+![Breakpoint](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Breakpoint%20set.png)
+
+Once the debugger has ran the process up until my breakpoint I check the static field in memory.
+And there they all are, all the variables in cleartext!
+
+Decrypted malware config variables:
+![Fields Decrypted](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/all%20variables%20decrypted.png)
+
