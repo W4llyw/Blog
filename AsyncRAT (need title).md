@@ -40,3 +40,5 @@ Ok a 32bit executable built written in C#
 
 ![PEStudio](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Pestudio%20info.png)
 
+
+#### dnSpy
