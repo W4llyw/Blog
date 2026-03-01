@@ -52,11 +52,11 @@ Well it was pretty straightforward actually seems like the best place to start w
 
 ![Entry Point](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Entry%20Point.png)
 
-This led to `Client`, which contained `Settings` and I noticed something that was in the original blog post I referenced earlier.
+This led to the `Client` namespace, which contained the `Settings` class and I noticed something that was in the original blog post I referenced earlier.
 
 ![Client to Settings](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Client%20to%20Settings.png)
 
-Within `Settings` there is a method called `InitilizeSettings()`, this basically contains the hardcoded config for the malware which is encrypted before execution to avoid detection via static analysis.
+Within the `Settings` class there is a method called `InitializeSettings()`, this basically contains the hardcoded config for the malware which is encrypted before execution to avoid detection via static analysis.
 
 ![InitializeSettings](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/InitializeSettings.png)
 
@@ -64,3 +64,19 @@ Within `Settings` there is a method called `InitilizeSettings()`, this basically
 
 The use of the `InitializeSettings` method is a somewhat ingenious technique, it serves two purposes the first is that it doesn't require the process to rely on an external .config file which makes its footprint smaller and the second is to decrypt these hardcoded configs the malware would have to be ran.
 
+Looking further down the assembly explorer I notice some very interesting namespaces: `Clients.Modules.Passwords.Targets`, `Clients.Modules.Passwords.Targets.Browsers`, `Clients.Modules.Passwords.Targets.Messengers`, and `Clients.Modules.Passwords.Targets.System`.
+Looking through these it seems like this RAT has been modified into an info stealer, targeting a multitude of information such as Browser information such as stored passwords, and credit card information, Crypto wallets, Discord or Telegram tokens, keylogging,and WebCam screenshots.
+
+Browser Information Stealing:
+![Stealing Browser Info](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Targeting%20browser%20info.png)
+
+Stealing Crypto Wallets:
+![Crypto](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Targeting%20Crypto%20wallets.png)
+
+Discord and Telegram token theft:
+![Discord Token](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Targeting%20Discord%20token.png)
+
+Sending Keylogger logs to Telegram:
+![Exfil of Keylogger](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Sending%20Keylogging%20to%20Telegram.png)
+
+Ok so now 
