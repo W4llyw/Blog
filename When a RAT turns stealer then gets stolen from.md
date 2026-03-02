@@ -1,4 +1,4 @@
-# When RAT turns stealer then gets stolen from
+# When a RAT turns stealer then gets stolen from
 
 
 I recently looked into AsyncRAT in another blog post, that one is what I would call a "lite" version of malware analysis. Honestly it should have been called a fire starter as it lit a fire under me to really get into the internals of malware and do a deeper dive myself. 
@@ -108,6 +108,7 @@ Self Destruction:
 
 ### A little Counter Intelligence
 *Take Caution when interacting with threat actor environments it is very easy to leak your IP*
+
 You may have noticed that two of the hardcoded variables for the settings in this malware sample were related to Telegram: `TelegramToken` and `TelegramChatID`. Because this sample was so recently posted I was betting that their Telegram channel was still active and if it was could I disrupt their little infostealing operation? 
 
 But how do I interact with a Telegram channel with just the info I have?
