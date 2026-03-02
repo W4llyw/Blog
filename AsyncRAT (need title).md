@@ -142,5 +142,6 @@ Unfortunately I was unable to cause any disruption to this one I received 401 un
 
 
 ### What a wild ride
-We went from remote access trojan to infostealer to stolen data being exfiltrated via a backdoor whithin the malware!
+We went from remote access trojan to infostealer to the stolen data being exfiltrated via a backdoor within the malware!
+
 All in all I learned a lot and from where I am standing it only gets better from here. I want to dig into more malware samples, possibly tackle something obfuscated? Oh and I want to eventually get into dynamic analysis which I know can be a lot more dangerous since you're purposely launching malware.
