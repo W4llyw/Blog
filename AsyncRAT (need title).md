@@ -65,7 +65,7 @@ Within the `Settings` class there is a method called `InitializeSettings()`, thi
 The use of the `InitializeSettings` method is a somewhat ingenious technique, it serves two purposes the first is that it doesn't require the process to rely on an external .config file which makes its footprint smaller and the second is to decrypt these hardcoded configs the malware would have to be ran.
 
 Looking further down the assembly explorer I notice some very interesting namespaces: `Clients.Modules.Passwords.Targets`, `Clients.Modules.Passwords.Targets.Browsers`, `Clients.Modules.Passwords.Targets.Messengers`, and `Clients.Modules.Passwords.Targets.System`.
-Looking through these it seems like this RAT has been modified into an info stealer, targeting a multitude of information such as Browser information such as stored passwords, and credit card information, Crypto wallets, Discord or Telegram tokens, keylogging,and WebCam screenshots.
+Looking through these it seems like this RAT has been modified into an infostealer, targeting a multitude of information such as Browser information such as stored passwords, and credit card information, Crypto wallets, Discord or Telegram tokens, keylogging,and WebCam screenshots.
 
 Browser Information Stealing:
 ![Stealing Browser Info](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Targeting%20browser%20info.png)
@@ -79,7 +79,7 @@ Discord and Telegram token theft:
 Sending Keylogger logs to Telegram:
 ![Exfil of Keylogger](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Sending%20Keylogging%20to%20Telegram.png)
 
-Ok so now I am 100% sure this is an info stealer and I noticed in the `InitializeSettings` method there were two fields that referenced Telegram: `TelegramChatID` and `TelegramToken`. But they are encrypted which means I would need to run the malware to see the decrypted data.
+Ok so now I am 100% sure this is an infostealer and I noticed in the `InitializeSettings` method there were two fields that referenced Telegram: `TelegramChatID` and `TelegramToken`. It seems pretty clear that this modified AsyncRAT is an infostealer that reports its stolen data out to a Telegram channel via a bot. But they are encrypted which means I would need to run the malware to see the decrypted data.
 
 In comes dnSpy once again to save the day, I can "partially" run the malware in dnSpy by setting a breakpoint and view what the process has done up unto that point in memory.I set the breakpoint to the return at the very bottom of the `InitializeSettings` method, then run the debugger.
 
@@ -92,7 +92,7 @@ And there they all are, all the variables in cleartext!
 Decrypted malware config variables:
 ![Fields Decrypted](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/all%20variables%20decrypted.png)
 
-There is some very juicy info here but we will and will keep moving and looking more into the malware sample. 
+There is some very juicy info here but we will keep moving and looking more into the malware sample. 
 One thing I did notice in the decrypted settings is that the `Anti` field is `false` (which would have made this analysis a lot more difficult). This was the anti analysis method that is seen in other AsyncRAT samples and even though this is a modified version of AsyncRAT it still contained the `AntiAnalysis` method, which I took an interest in and thought it should at least be brought up here. It checks for a multitude of things like static analysis tools, weather it is sand boxed or not, and if it's being ran in hypervisor such as VirtualBox or VMware.
 
 ![AntiAnalysis](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/AntiAnalysis.png)
@@ -103,4 +103,21 @@ Self Destruction:
 ![Melt](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Melt.png)
 
 ### The offensive (need title)
+You may have noticed that two of the hardcoded variables for the settings in this malware sample were related to Telegram: `TelegramToken` and `TelegramChatID`. Because this sample was so recently posted I was betting that their Telegram channel was still active and if it was could I disrupt their little infostealing operation? 
 
+But how do I interact with a Telegram channel with just the info I have?
+Well in my searching for how I could use the Telegram Token and Chat ID to gain access to this bot and channel I discovered someone had already made software for just that reason. [TeleTracker](https://github.com/tsale/TeleTracker) super easy to setup just follow the install on the github page and your off!
+
+Well I was right! their channel was still active!
+Below is the bots name, username, channel access, and the name of the group.
+
+![Telegram Bot](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Telegram%20bot%20info.png)
+
+From its name (ONE FOR ALL) this bot may be used by multiple threat actors with this group channel (XWorm up) being a repository to gather and share stolen data.
+
+I was also able to find the chats administrator.
+
+![Chat Admin](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Telegram%20admin%20info.png)
+
+I was to pull the number of messages that were in the group chat and it was over 6000 messages. 
+Based on the permissions of the bot I couldn't read any messages, but I was able to delete quite a few and felt good doing it hopefully it at least put a kink in their operation.
