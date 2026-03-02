@@ -123,7 +123,7 @@ I was also able to find the chats administrator.
 
 ![Chat Admin](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Telegram%20admin%20info.png)
 
-I was to pull the number of messages that were in the group chat and it was over 6000 messages. 
+I was able to pull the number of messages that were in the group chat and it was over 6000 messages. 
 Based on the permissions of the bot I couldn't read any messages, but I was able to delete quite a few and felt good doing it hopefully it at least put a kink in their operation.
 
 ### WorldWind
@@ -139,3 +139,8 @@ And wouldn't you know it there it was the info from my stealer was being sent to
 Unfortunately I was unable to cause any disruption to this one I received 401 unauthorized codes for everything.
 
 ![Connecting to the Other Telegram](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Connecting%20to%20Other.png)
+
+
+### What a wild ride
+We went from remote access trojan to infostealer to stolen data being exfiltrated via a backdoor whithin the malware!
+All in all I learned a lot and from where I am standing it only gets better from here. I want to dig into more malware samples, possibly tackle something obfuscated? Oh and I want to eventually get into dynamic analysis which I know can be a lot more dangerous since you're purposely launching malware.
