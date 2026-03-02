@@ -50,7 +50,9 @@ Initially looking at dnSpy it is pretty overwhelming and took some research on w
 
 ![dnSpy](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/dnSpy.png)
 
-Well it was pretty straightforward actually seems like the best place to start was called the Entry Point. See the Entry Point is the very first instruction that executes in a process. This is where the Operating System gives control to the application so it can start performing these instructions that the Entry Point points to.
+Well it was pretty straightforward actually seems like the best place to start was called the Entry Point. 
+
+See the Entry Point is the very first instruction that executes in a process. This is where the Operating System gives control to the application so it can start performing these instructions that the Entry Point points to.
 
 ![Entry Point](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Entry%20Point.png)
 
