@@ -126,7 +126,7 @@ I was also able to find the chats administrator.
 I was able to pull the number of messages that were in the group chat and it was over 6000 messages. 
 Based on the permissions of the bot I couldn't read any messages, but I was able to delete quite a few and felt good doing it hopefully it at least put a kink in their operation.
 
-### WorldWind
+### The WorldWind
 In some of the screen shots you may have noticed the name WorldWind come up a few times so I decided to look into it as well.I Found out that WorldWind Stealer is in deed an infostealer and is basically built with code copy and pasted from AsyncRAT (RAT) and StormKitty (Infostealer). There have been a few infostealer made in the exact same way most notably are WorldWind Stealer (this one), DarkEye, and Prynt Stealer. In fact there was an article referencing all three in no honor among thieves scenario where presumably whomever is handing out these stealer was stealing the stolen data from them.
 [ZScaler Article on the stealers](https://www.zscaler.com/blogs/security-research/no-honor-among-thieves-prynt-stealer-s-backdoor-exposed)
 
