@@ -106,7 +106,7 @@ If any of these return true the process precedes to a method called `FakeErrorMe
 Self Destruction:
 ![Melt](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Melt.png)
 
-### The offensive (need title)
+### A little Counter Intelligence
 You may have noticed that two of the hardcoded variables for the settings in this malware sample were related to Telegram: `TelegramToken` and `TelegramChatID`. Because this sample was so recently posted I was betting that their Telegram channel was still active and if it was could I disrupt their little infostealing operation? 
 
 But how do I interact with a Telegram channel with just the info I have?
