@@ -69,7 +69,7 @@ Within the `Settings` class there is a method called `InitializeSettings()`, thi
 The use of the `InitializeSettings` method is a somewhat ingenious technique, it serves two purposes the first is that it doesn't require the process to rely on an external .config file which makes its footprint smaller and the second is to decrypt these hardcoded configs the malware would have to be ran.
 
 Looking further down the assembly explorer I notice some very interesting namespaces: `Clients.Modules.Passwords.Targets`, `Clients.Modules.Passwords.Targets.Browsers`, `Clients.Modules.Passwords.Targets.Messengers`, and `Clients.Modules.Passwords.Targets.System`.
-Looking through these it seems like this RAT has been modified into an infostealer, targeting a multitude of information such as Browser information such as stored passwords, and credit card information, Crypto wallets, Discord or Telegram tokens, keylogging,and WebCam screenshots.
+Looking through these it seems like this RAT has been modified into an infostealer targeting a wide range of data, Browser information such as stored passwords, and credit cards, Crypto wallets, Discord and Telegram tokens, keylogging, and taking screenshots of the victims Webcam usage.
 
 Browser Information Stealing:
 ![Stealing Browser Info](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Targeting%20browser%20info.png)
