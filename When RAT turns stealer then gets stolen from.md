@@ -1,4 +1,4 @@
-# AsyncRAT Dive (Need Title)
+# When RAT turns stealer then gets stolen from
 
 
 I recently looked into AsyncRAT in another blog post, that one is what I would call a "lite" version of malware analysis. Honestly it should have been called a fire starter as it lit a fire under me to really get into the internals of malware and do a deeper dive myself. 
