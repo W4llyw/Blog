@@ -36,7 +36,7 @@ During my search through the malware's strings some very interesting things jump
 #### PEStudio
 I needed to know what this thing was built with so I can dissect it using the proper tool. 
 
-In comes [PEStudio!](https://www.winitor.com) It can identify a multitude of things for initial static malware analysis, but I just needed it to identify what my sample was built with.
+In comes [PEStudio](https://www.winitor.com)! It can identify a multitude of things for initial static malware analysis, but I just needed it to identify what my sample was built with.
 
 Ok a 32bit executable written in C#
 
