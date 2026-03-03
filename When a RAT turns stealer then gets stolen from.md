@@ -1,14 +1,14 @@
 # When a RAT turns stealer then gets stolen from
 
 
-I recently looked into AsyncRAT in another blog post, that one is what I would call a "lite" version of malware analysis. Honestly, it should have been called a fire starter as it lit a fire under me to really get into the internals of malware and do a deeper dive. 
-My goal this time around was to get into the code of a sample of AsyncRAT that I found online, understand what it does, and why. At the same time learning how to interact with malicious files safely and with the proper tools. This way I gain familiarity with the tools needed and get a better understanding of programming languages.
+I recently looked into AsyncRAT in another blog post. That one is what I would call a "lite" version of malware analysis. Honestly, it should have been called a fire starter as it lit a fire under me to really get into the internals of malware and do a deeper dive. 
+My goal this time around was to get into the code of a sample of AsyncRAT that I found online, understand what it does, and why. At the same time I wanted to learn how to interact with malicious files safely and the proper tools to use. This way I gain familiarity with the tools needed and get a better understanding of programming languages.
 
-So without further delay, let me introduce you to just that. My go at a deeper analysis of the AsyncRAT (which turns out to have a bit of a twist and a small victory in the end!).
+So without further delay, let me introduce you to just that, my go at a deeper analysis of the AsyncRAT (which turns out to have a bit of a twist and a small victory in the end!).
 
 ### The setup
-If I am going to download and dismantle software that is built to ruin peoples day I need a safe to place to do it, in and since this is my first time doing this, the appropriate tool. Conveniently enough, I had a Linux machine I could run a windows (I chose windows because it's the most targeted OS) virtual machine on. I figured this was the safest bet having the guest and the host running two different operating systems in case of any kind of breakout.
-Now I had to find the tools that analysts use to do their analysis. I have heard of a few pre-built OSs that would be a great place to get started namely [REMnux](https://remnux.org/#home) and [FlareVM](https://github.com/mandiant/flare-vm). REMnux is linux based so FlareVM it was.
+If I am going to download and dismantle software that is built to ruin peoples day I need a safe to place to do it, and since this is my first time doing this, the appropriate tool. Conveniently enough I had a Linux machine I could run a windows (I chose windows because it's the most targeted OS) virtual machine on. I figured this was the safest bet— having the guest and the host running two different operating systems in case of any kind of breakout.
+Now I had to find the tools that analysts use. I have heard of a few pre-built OSs that would be a great place to get started, namely, [REMnux](https://remnux.org/#home) and [FlareVM](https://github.com/mandiant/flare-vm). REMnux is linux based so FlareVM it was.
 
 *FlareVM is technically not a OS in the sense that REMnux is a linux distro. FlareVM is a collection of software installation scripts for Windows.*
 
@@ -28,7 +28,7 @@ The [Malware Bazaar](https://bazaar.abuse.ch) is just that place. I searched for
 #### Strings
 Before diving into the code with a decompiler I figured I would look at it from a very high point of view via [Strings](https://learn.microsoft.com/en-us/sysinternals/downloads/strings). 
 
-During my search through the malware's strings some very interesting things jumped out to me. Most notably, the strings TelegramToken and TelegramChatID. I knew that the sample of AsyncRAT I found would be different than the one found in [this](https://blog.qualys.com/vulnerabilities-threat-research/2022/08/16/asyncrat-c2-framework-overview-technical-analysis-and-detection) post, (which was what made me want to look further into AsyncRAT) but the mention of a telegram ID was a big surprise!
+During my search through the malware's strings some very interesting things jumped out to me. Most notably, the strings TelegramToken and TelegramChatID. I knew that the sample of AsyncRAT I found would be different than the one found in [this](https://blog.qualys.com/vulnerabilities-threat-research/2022/08/16/asyncrat-c2-framework-overview-technical-analysis-and-detection) post, (which was what made me want to look further into AsyncRAT), but the mention of a telegram ID was a big surprise!
 
 ![Strings Findings](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Strings.png)
 
@@ -44,13 +44,13 @@ Ok a 32bit executable written in C#
 
 
 #### dnSpy
-Ok this is where we really get into things [dnSpy](https://github.com/dnSpy/dnSpy) is a debugger, decompiler, and a .NET/Unity assembly editor. Perfect for diving into this malware.
+This is where we really get into things. [dnSpy](https://github.com/dnSpy/dnSpy) is a debugger, decompiler, and a .NET/Unity assembly editor. Perfect for diving into this malware.
 
-Initially, looking at dnSpy is pretty overwhelming and took some research on where I should look first.
+Initially, getting into dnSpy is pretty overwhelming and took some research on where I should look first.
 
 ![dnSpy](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/dnSpy.png)
 
-Well it was pretty straightforward actually, seems like the best place to start was called the Entry Point. 
+Welp, it was pretty straightforward actually. Seems like the best place to start was called the Entry Point. 
 
 The Entry Point is the very first instruction that executes in a process. This is where the Operating System gives control to the application so it can start performing these instructions that the Entry Point points to.
 
@@ -69,7 +69,7 @@ Within the `Settings` class there is a method called `InitializeSettings()`, thi
 The use of the `InitializeSettings` method is a somewhat ingenious technique. It serves two purposes: the first is that it doesn't require the process to rely on an external .config file which makes its footprint smaller, and the second is to decrypt these configs the malware would have to be executed.
 
 Looking further down the assembly explorer I noticed some very interesting namespaces: `Clients.Modules.Passwords.Targets`, `Clients.Modules.Passwords.Targets.Browsers`, `Clients.Modules.Passwords.Targets.Messengers`, and `Clients.Modules.Passwords.Targets.System`.
-Looking through these it seems like this RAT has been modified into an infostealer targeting a wide range of data such as: passwords and credit cards stored in browsers, Crypto wallets, Discord and Telegram tokens, keystrokes, and the ability to take screenshots of the victims Webcam.
+LBased on the namespaces it seems like this RAT has been modified to be an infostealer targeting a wide range of data such as: passwords and credit cards stored in browsers, Crypto wallets, Discord and Telegram tokens, keystrokes, and the ability to take screenshots of the victims Webcam.
 
 Browser Information Stealing:
 ![Stealing Browser Info](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Targeting%20browser%20info.png)
@@ -91,13 +91,13 @@ Setting the Breakpoint:
 ![Breakpoint](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/Breakpoint%20set.png)
 
 Once the debugger has ran the process up to my breakpoint I check the static fields in memory.
-And there they are, all the variables in cleartext!
+And there they are. All the variables in cleartext!
 
 Decrypted malware config variables:
 ![Fields Decrypted](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/all%20variables%20decrypted.png)
 
-There is some very juicy info here, but we will keep moving and looking more into the malware sample. 
-One thing I did notice in the decrypted settings is that the `Anti` field is `false` (which would have made this analysis a lot more difficult). This was the anti analysis method that is seen in other AsyncRAT samples. Even though this is a modified version of AsyncRAT it still contained the `AntiAnalysis` method which I took an interest in and thought it should at least be brought up here. It checks for a multitude of things like, static analysis tools, wether it is sand boxed or not, and if it's being ran in a hypervisor such as VirtualBox or VMware.
+There is some very juicy info here, but we will keep moving and look more into the malware sample. 
+One thing I did notice in the decrypted settings is that the `Anti` field is `false` (which would have made this analysis a lot more difficult). This was the anti analysis method that is seen in other AsyncRAT samples. Even though this is a modified version of AsyncRAT it still contained the `AntiAnalysis` method which I took an interest in and thought it should at least be brought up here. It checks for a multitude of things such as static analysis tools, wether it is sand boxed or not, and if it's being ran in a hypervisor such as VirtualBox or VMware.
 
 ![AntiAnalysis](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/AntiAnalysis.png)
 
@@ -131,10 +131,10 @@ Based on the permissions of the bot I couldn't read any messages, but I was able
 
 
 ### The WorldWind
-In some of the screen shots you may have noticed the name WorldWind come up a few times so I decided to look into it as well. I Found out that the WorldWind Stealer is indeed an infostealer. It's basically built with code copy and pasted from AsyncRAT (RAT) and StormKitty (Infostealer). There have been a few infostealers made in the exact same way. Most notably are WorldWind Stealer (this one), DarkEye, and Prynt Stealer. In fact there was an article referencing all three in a "no honor among thieves scenario" where presumably, whomever is handing out the infostealers was stealing the stolen data from them.
+In some of the screen shots you may have noticed the name WorldWind come up a few times. I decided to look into it as well. I Found out that the WorldWind Stealer is indeed an infostealer. It's basically built with code copy and pasted from AsyncRAT (RAT) and StormKitty (Infostealer). There have been a few infostealers made in the exact same way. Most notably are WorldWind Stealer (this one), DarkEye, and Prynt Stealer. In fact there was an article referencing all three in a "no honor among thieves" scenario where presumably, whomever is handing out the infostealers was stealing the stolen data from them.
 [ZScaler Article on the stealers](https://www.zscaler.com/blogs/security-research/no-honor-among-thieves-prynt-stealer-s-backdoor-exposed)
 
-Naturally, I had to check my sample for this.
+Naturally I had to check my sample for this.
 And wouldn't you know it! There it was, the info from my stealer was being sent to another Telegram chat ID. The only difference in mine is the Telegram Token was being hosted on pastebin.
 
 ![The Other Telegram](https://github.com/W4llyw/Blog/blob/main/Images/AsyncRAT/The%20Other%20Telegram.png)
@@ -147,4 +147,4 @@ Unfortunately, I was unable to cause any disruption to this one. I received 401 
 ### What a wild ride
 We went from remote access trojan to infostealer to the stolen data being exfiltrated via a backdoor within the malware!
 
-All in all I learned a lot, and from where I am standing it only gets better from here. I want to dig into more malware samples, possibly tackle something obfuscated? Oh, and I want to eventually get into dynamic analysis which I know can be a lot more dangerous since you're purposely launching malware.
+All in all I learned a lot, and from where I am standing it only gets better from here. I want to dig into more malware samples. Possibly tackle something obfuscated? Oh, and I want to eventually get into dynamic analysis which I know can be a lot more dangerous since you're purposely launching malware.
