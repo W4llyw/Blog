@@ -32,3 +32,18 @@ Ok time to get into this thing and see just how obfuscated this thing is.
 ![Chinese](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Heavy%20Obfuscation%20and%20Chinese.png)
 
 It's very obfuscated and in Chinese...
+
+I have heard of [De4dot](https://github.com/de4dot/de4dot) for deobfuscation and found that it was already part of FlareVM so decided to throw it at De4dot.
+De4dot came back with "Detected Unknown Obfuscator", I am starting to wonder if the use of Chinese is throwing it off.
+
+![De4dot](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/De4dot%20uknown.png)
+
+I did some more research into other .net deobfuscation tools and came across another .net deobfuscator and unpacker [NETReactorSlayer](https://github.com/SychicBoy/NETReactorSlayer?tab=readme-ov-file).I really need to go through all the installed tools on FlareVM because checking FlareVM and NETReactorSlayer is also already installed, but honestly who has the time for that.
+Alright lets see what this thing can do, I checked all options and threw in the malware because why not.
+
+![Slaying](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slaying.png)
+
+Once NETReactorSlayer was done it produced a deobfuscated version of the exe with _Slayed appended to it(I renamed that one to just _QuasarRat_slayed.exe). It also unpacked a slew of dlls which explains the low amount of imports seen earlier in PeStudio.
+
+![Slayed&DLLs](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slayed%20w%20dll.png)
+
