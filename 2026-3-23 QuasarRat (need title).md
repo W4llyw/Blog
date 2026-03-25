@@ -25,3 +25,10 @@ Lets take a look at PEStudio to see if some of the imports can tell me anything.
 ![PeStudio](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Low%20Imports.png)
 
 ...5. There are 5 imports. And they didn't seem to stand out much, I mean `GetCurrentThread` could possibly be something but on its own not likely. I looked up the MiniDump api and it could be used for credential theft or information gathering, but the low amount of imports definitely means heavy obfuscation.
+
+### Diving in
+Ok time to get into this thing and see just how obfuscated this thing is.
+
+![Chinese](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Heavy%20Obfuscation%20and%20Chinese.png)
+
+It's very obfuscated and partially in Chinese...
