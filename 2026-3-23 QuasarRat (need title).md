@@ -10,7 +10,7 @@ As usual getting malware from the internet is never difficult. By using MalwareB
 
 ![MalwareBazaar](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Bazaar.png)
 
-### Initial look with Tools
+### An Initial look
 Detect It Easy (DIE) confirms that it is a .net application, and mentions that it's packed in the initial scan.
 
 ![DIE](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/DIE.png)
@@ -31,4 +31,4 @@ Ok time to get into this thing and see just how obfuscated this thing is.
 
 ![Chinese](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Heavy%20Obfuscation%20and%20Chinese.png)
 
-It's very obfuscated and partially in Chinese...
+It's very obfuscated and in Chinese...
