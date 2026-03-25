@@ -43,7 +43,11 @@ Alright lets see what this thing can do, I checked all options and threw in the 
 
 ![Slaying](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slaying.png)
 
-Once NETReactorSlayer was done it produced a deobfuscated version of the exe with _Slayed appended to it(I renamed that one to just _QuasarRat_slayed.exe). It also unpacked a slew of dlls which explains the low amount of imports seen earlier in PeStudio.
+Once NETReactorSlayer was done it produced a deobfuscated version of the exe with _Slayed appended to it(I renamed that one to just _QuasarRat_slayed.exe). It also unpacked a slew of dlls it must use at runtime which explains the low amount of imports seen earlier in PeStudio.
 
-![Slayed&DLLs](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slayed%20w%20dll.png)
+![Slayed&Dlls](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slayed%20w%20dll.png)
+
+Looking at the sample again in dnSpy it is no longer in Chinese, but still obfuscated.
+
+![English&Obfuscated](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/English%20but%20obfuscated.png)
 
