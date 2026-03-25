@@ -6,7 +6,7 @@ I was looking for my next journey into malware analysis and this time around I d
 ### Finding the sample
 As usual getting malware from the internet is never difficult. By using MalwareBazaar's search syntax `signature:QuasarRAT` I pulled up all the posted malware with the QuasarRAT signature. Since it was sorted by latest posted I chose the first one that showed up and just went for it.
 
-**Take Caution When Downloading From Any Site That Hosts Malware as These Are Live Samples**
+<p style="text-align: center;">**Take Caution When Downloading From Any Site That Hosts Malware as These Are Live Samples**</p>
 
 ![MalwareBazaar](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Bazaar.png)
 
