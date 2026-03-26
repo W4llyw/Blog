@@ -75,4 +75,4 @@ With the breakpoint set I hit debug(`F5`) opened the static fields window and th
 
 ![The Reveal](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/The%20Reveal.png)
 
-We will see what all we can do with this info soon, but now I want to move on to see what all this thing is trying to do.
+We will see what all we can do with this info soon, but now I want to move on to see what all this thing is trying to do. After running up to the break point all the unpacked dlls are loaded. One that stuck out to me was called `Pulsar.Common.dll` once expanded, it looks like all the malicious functions of this malware come from this one dll.
