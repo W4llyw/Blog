@@ -58,3 +58,21 @@ As you may have noticed in one of the earlier screenshots there are a lot of nam
 ![Assembly list](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/assembly%20list.png)
 
 Luckily I know just were to start: the entry point.
+
+![EntryPoint](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Entry%20Point.png)
+
+Now based off of my previous experiances with malware I knew that early on it needs to decrypt its configuration so it can act on them and continue functioning. Although I couldn't really read what the names of the classes were I did what I would call a "walk" of them. I simply went down the entry point class by class until one led me to a list of items being decrypted. And thats exactly where class `e4VF3YgDwO0iB` led me.
+
+![Walking the Entrypoint](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Walking%20the%20entry%20point.png)
+
+![Finding the Goods](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Finding%20the%20goods.png)
+
+I have been in this situation before and knew exactly what to do, set a break point.
+
+![Breakpoint](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Break%20Point%20set.png)
+
+With the breakpoint set I hit debug(`F5`) opened the static fields window and there it was. Instantly what looks like a C2 IP with port number and the name and location of where the malware runs from once executed.
+
+![The Reveal](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/The%20Reveal.png)
+
+We will see what all we can do with this info soon, but now I want to move on to see what all this thing is trying to do.
