@@ -33,8 +33,8 @@ Ok time to get into this thing and see just how obfuscated this thing is.
 
 It's very obfuscated and in Chinese...
 
-I have heard of [De4dot](https://github.com/de4dot/de4dot) for deobfuscation and found that it was already part of FlareVM so decided to throw it at De4dot.
-De4dot came back with "Detected Unknown Obfuscator", I am starting to wonder if the use of Chinese is throwing it off.
+I needed to find something that can deobfuscate this for me so I can at least start figuring things out. I have heard of [De4dot](https://github.com/de4dot/de4dot) for deobfuscation and found that it was already part of FlareVM so decided to throw it at De4dot.
+De4dot came back with "Detected Unknown Obfuscator", this made me wonder if the use of Chinese is throwing it off.
 
 ![De4dot](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/De4dot%20uknown.png)
 
