@@ -80,9 +80,12 @@ We will see what all we can do with this info soon, but now I want to move on to
 ![Pulsar1](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Pulsar.png)
 ![Pulsar2](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Pulsar2.png)
 
-Looking at these namespaces you can clearly see that this thing is capable of just about everything in the book. It's gathering info, changing registry keys, and doing what looks like ransomware tactics in `Pulsar.Common.Messages.FunStuff`.
+Looking at these namespaces you can clearly see that this thing is capable of just about everything in the book. It's gathering info, changing registry keys, and doing what looks like possible ransomware tactics in `Pulsar.Common.Messages.FunStuff`.
 
 ![FunStuff](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/funstuff.png)
+
+
+### Maybe
 
 
 ### Pulsar (title)
