@@ -61,7 +61,7 @@ Luckily I know just were to start: the entry point.
 
 ![EntryPoint](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Entry%20Point.png)
 
-Now based off of my previous experiances with malware I knew that early on it needs to decrypt its configuration so it can act on them and continue functioning. Although I couldn't really read what the names of the classes were I did what I would call a "walk" of them. I simply went down the entry point class by class until one led me to a list of items being decrypted. And thats exactly where class `e4VF3YgDwO0iB` led me.
+Now based off of my previous experiences with malware I knew that early on it needs to decrypt its configuration so it can act on them and continue functioning. Although I couldn't really read what the names of the classes were I did what I would call a "walk" of them. I simply went down the entry point class by class until one led me to a list of items being decrypted. And thats exactly where class `e4VF3YgDwO0iB` led me.
 
 ![Walking the Entrypoint](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Walking%20the%20entry%20point.png)
 
@@ -80,7 +80,10 @@ We will see what all we can do with this info soon, but now I want to move on to
 ![Pulsar1](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Pulsar.png)
 ![Pulsar2](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Pulsar2.png)
 
-Looking at these namespaces you can clearly see that this thing is capable of just about everything in the book. It's gathering info its changing registry keys and doing something called `Pulsar.Common.Messages.FunStuff` doing what could be some ransomware tactics.
+Looking at these namespaces you can clearly see that this thing is capable of just about everything in the book. It's gathering info, changing registry keys, and doing what looks like ransomware tactics in `Pulsar.Common.Messages.FunStuff`.
 
 ![FunStuff](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/funstuff.png)
 
+
+### Pulsar (title)
+I was interested in why this Quasar RAT was exclusively using this Pulsar dll to perform just about any and everything that you can think of when it comes to malware. I did some digging and found out that Pulsar RAT belongs to the Quasar RAT family and first appeared in early 2025; which means the sample I found is a fairly newly crafted RAT! While I was poking around on the internet I came across this [gem](https://45734016.fs1.hubspotusercontent-na1.net/hubfs/45734016/Pulsar%20RAT%20Technical%20Malware%20Analysis%20Report.pdf) of an article where a researchers at ThreatMon got ahold of a PulsarRAT builder. Based off what they found what I am dealing with has got to be a Pulsar RAT.
