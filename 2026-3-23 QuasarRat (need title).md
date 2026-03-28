@@ -123,7 +123,7 @@ My next adventure may be another .Net app or a generic PE I am not sure yet as I
 
 ### IOCs
 Hashes:
-| Sample SHA256 hash:   | acf4e409f279deff4fde7ea4457d2a3a126d7602d32058188727c60318a8086d                                 |
+| Sample SHA256 hash:| acf4e409f279deff4fde7ea4457d2a3a126d7602d32058188727c60318a8086d                                 |
 | --------------------- | ------------------------------------------------------------------------------------------------ |
 | Sample SHA3-384 hash: | 7bb52877a0cac41a94767815d46b24af983a3b40c876e65d2780fc5d88520d01b54a56450de841a994457b0910fa73f3 |
 | Sample SHA1 hash:     | 9aa046c32f4fa02f169402d85675480d65f524c0                                                         |
@@ -134,5 +134,5 @@ Hashes:
 | Mutex                 | 5c4f7a32-2d43-4837-8229-89a7ff9c84ba                                                             |
 | Pulsar.dll SHA256     | 1c1a49dc957ade033bd60dca58db3cc2221bd71bab7a20ab4f5009e98f13ff29                                 |
 
-MITRE ATT&CK and Malware Behavior Catalog brought to you by [Mandiant Capa](https://github.com/mandiant/capa):
-[Capa Data](https://mandiant.github.io/capa/explorer/#/analysis?rdoc=https://raw.githubusercontent.com/W4llyw/Blog/refs/heads/main/Images/QuasarRAT/Pulsar_Capa.json)
+### [MITRE ATT&CK and Malware Behavior Catalog](https://mandiant.github.io/capa/explorer/#/analysis?rdoc=https://raw.githubusercontent.com/W4llyw/Blog/refs/heads/main/Images/QuasarRAT/Pulsar_Capa.json)
+brought to you by [Mandiant Capa](https://github.com/mandiant/capa)
