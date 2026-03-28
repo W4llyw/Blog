@@ -1,4 +1,4 @@
-# Title
+# Family Matters from Quasar to Pulsar
 
 
 I was looking for my next journey into malware analysis and this time around I decided to take a look at QuasarRat. It's a .net based RAT that is a bit more complicated than AsyncRAT and seemed to have been favored by Advanced Persistent Threats (APT) based out of china for awhile. According to an article posted by [Huntress](https://www.huntress.com/threat-library/threat-actors/apt10) parts of the APT (APT10) group were indicted in 2018. This made me interested in why or who is still using it today and possibly exposing their infrastructure, lets see what we can find out.
@@ -116,7 +116,7 @@ Searching the C2s IP in virus total shows only 13 vendors have marked it malicio
 I also voted and commented on Virus Total so hopefully it will bring a little more awareness to the C2 infrastructure.
 
 
-### Conclusion Title
+### They grow up so fast
 From initially thinking this was an old malware being reborn to finding out that it was a much younger variant of its predecessor.Malware has yet to not surprise me, you think "oh this is a run of the mill RAT resurfacing" and it ends up being something new built from something old. From the heavy obfuscation to the use of Chinese I thought this was going to be a Quasar RAT through and through especially with the earlier references to the Chinese APT group. I get it unpacked an bam this thing was built about a year ago.
 My next adventure may be another .Net app or a generic PE I am not sure yet as I am still learning assembly and how to properly analyze generic PE malware. If I go with another .Net app I will do more with renaming namespaces and classes for better readability, I feel like this is something I need to form a habit around.
 
@@ -126,8 +126,9 @@ My next adventure may be another .Net app or a generic PE I am not sure yet as I
 brought to you by [Mandiant Capa](https://github.com/mandiant/capa)
 
 #### Hashes:
-| Sample SHA256 hash:| acf4e409f279deff4fde7ea4457d2a3a126d7602d32058188727c60318a8086d                                 |
-| --------------------- | ------------------------------------------------------------------------------------------------ |
+| Type | Data |
+| :-------------------- | :----------------------------------------------------------------------------------------------- |
+| Sample SHA256 hash:   | acf4e409f279deff4fde7ea4457d2a3a126d7602d32058188727c60318a8086d                                 |
 | Sample SHA3-384 hash: | 7bb52877a0cac41a94767815d46b24af983a3b40c876e65d2780fc5d88520d01b54a56450de841a994457b0910fa73f3 |
 | Sample SHA1 hash:     | 9aa046c32f4fa02f169402d85675480d65f524c0                                                         |
 | Sample MD5 hash:      | 6892e8230226a3353d942af64acc52a0                                                                 |
