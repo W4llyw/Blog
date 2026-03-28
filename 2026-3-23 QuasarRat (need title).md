@@ -3,12 +3,14 @@
 
 I was looking for my next journey into malware analysis and this time around I decided to take a look at QuasarRat. It's a .net based RAT that is a bit more complicated than AsyncRAT and seemed to have been favored by Advanced Persistent Threats (APT) based out of china for awhile. According to an article posted by [Huntress](https://www.huntress.com/threat-library/threat-actors/apt10) parts of the APT (APT10) group were indicted in 2018. This made me interested in why or who is still using it today and possibly exposing their infrastructure, lets see what we can find out.
 
+
 ### Finding the sample
 As usual getting malware from the internet is never difficult. By using MalwareBazaar's search syntax `signature:QuasarRAT` I pulled up all the posted malware with the QuasarRAT signature. Since it was sorted by latest posted I chose the first one that showed up and just went for it.
 
 **Take Caution When Downloading From Any Site That Hosts Malware as These Are Live Samples**
 
 ![MalwareBazaar](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Bazaar.png)
+
 
 ### An Initial look
 Detect It Easy (DIE) confirms that it is a .net application, and mentions that it's packed in the initial scan.
@@ -25,6 +27,7 @@ Lets take a look at PEStudio to see if some of the imports can tell me anything.
 ![PeStudio](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Low%20Imports.png)
 
 ...5. There are 5 imports. And they didn't seem to stand out much, I mean `GetCurrentThread` could possibly be something but on its own not likely. I looked up the MiniDump api and it could be used for credential theft or information gathering, but the low amount of imports definitely means heavy obfuscation.
+
 
 ### Diving in
 Ok time to get into this thing and see just how obfuscated this thing is.
@@ -85,8 +88,18 @@ Looking at these namespaces you can clearly see that this thing is capable of ju
 ![FunStuff](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/funstuff.png)
 
 
-### Maybe
-
-
 ### Pulsar (title)
 I was interested in why this Quasar RAT was exclusively using this Pulsar dll to perform just about any and everything that you can think of when it comes to malware. I did some digging and found out that Pulsar RAT belongs to the Quasar RAT family and first appeared in early 2025; which means the sample I found is a fairly newly crafted RAT! While I was poking around on the internet I came across this [gem](https://45734016.fs1.hubspotusercontent-na1.net/hubfs/45734016/Pulsar%20RAT%20Technical%20Malware%20Analysis%20Report.pdf) of an article where a researchers at ThreatMon got ahold of a PulsarRAT builder. Based off what they found what I am dealing with has got to be a Pulsar RAT.
+
+Some of the mentioned functions of the Pulsar RAT match the namespaces in my Pulsar dll.
+
+![Capability compare](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/capa%20cmp.png)
+
+Also the client tag during configuration and the scheme of the mutex confirms what I found was also the mutex.
+
+![Config Compare](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/info%20cmp.png)
+
+Seems like the wallpaper change and hiding the taskbar was not part of a ransomware function, just to cause distraction and confusion.
+
+![Fun Compare](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/fun%20stuff%20cmp.png)
+
