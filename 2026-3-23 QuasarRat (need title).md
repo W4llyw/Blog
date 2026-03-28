@@ -103,3 +103,15 @@ Seems like the wallpaper change and hiding the taskbar was not part of a ransomw
 
 ![Fun Compare](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/fun%20stuff%20cmp.png)
 
+
+### Some CTI
+Now lets see just where this C2 is going and if we can't cause them some issues. Using good ole Shodan it looks like the IP address points to VPS hosting service so most likely it is not located in St. Louis.
+
+![Shodan](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Shodan.png)
+
+Searching the C2s IP in virus total shows only 13 vendors have marked it malicious with only one comment mentioning Quasar RAT.
+
+![VirusTotal](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/VirusTotal.png)
+
+I also voted and commented on Virus Total so hopefully it will bring a little more awareness to the C2 infrastructure.
+
