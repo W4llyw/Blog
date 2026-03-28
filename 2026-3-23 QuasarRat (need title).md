@@ -88,7 +88,7 @@ Looking at these namespaces you can clearly see that this thing is capable of ju
 ![FunStuff](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/funstuff.png)
 
 
-### Pulsar (title)
+### Pulsar
 I was interested in why this Quasar RAT was exclusively using this Pulsar dll to perform just about any and everything that you can think of when it comes to malware. I did some digging and found out that Pulsar RAT belongs to the Quasar RAT family and first appeared in early 2025; which means the sample I found is a fairly newly crafted RAT! While I was poking around on the internet I came across this [gem](https://45734016.fs1.hubspotusercontent-na1.net/hubfs/45734016/Pulsar%20RAT%20Technical%20Malware%20Analysis%20Report.pdf) of an article where a researchers at ThreatMon got ahold of a PulsarRAT builder. Based off what they found what I am dealing with has got to be a Pulsar RAT.
 
 Some of the mentioned functions of the Pulsar RAT match the namespaces in my Pulsar dll.
@@ -115,3 +115,24 @@ Searching the C2s IP in virus total shows only 13 vendors have marked it malicio
 
 I also voted and commented on Virus Total so hopefully it will bring a little more awareness to the C2 infrastructure.
 
+
+### Conclusion Title
+From initially thinking this was an old malware being reborn to finding out that it was a much younger variant of its predecessor.Malware has yet to not surprise me, you think "oh this is a run of the mill RAT resurfacing" and it ends up being something new built from something old. From the heavy obfuscation to the use of Chinese I thought this was going to be a Quasar RAT through and through especially with the earlier references to the Chinese APT group. I get it unpacked an bam this thing was built about a year ago.
+My next adventure may be another .Net app or a generic PE I am not sure yet as I am still learning assembly and how to properly analyze generic PE malware. If I go with another .Net app I will do more with renaming namespaces and classes for better readability, I feel like this is something I need to form a habit around.
+
+
+### IOCs
+Hashes:
+| Sample SHA256 hash:   | acf4e409f279deff4fde7ea4457d2a3a126d7602d32058188727c60318a8086d                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------ |
+| Sample SHA3-384 hash: | 7bb52877a0cac41a94767815d46b24af983a3b40c876e65d2780fc5d88520d01b54a56450de841a994457b0910fa73f3 |
+| Sample SHA1 hash:     | 9aa046c32f4fa02f169402d85675480d65f524c0                                                         |
+| Sample MD5 hash:      | 6892e8230226a3353d942af64acc52a0                                                                 |
+| C2:                   | 212(.)28(.)186(.)94 : 4782                                                                       |
+| Install Exe           | svchost.exe                                                                                      |
+| Install Path          | AppData\Roaming\Logs<br>                                                                         |
+| Mutex                 | 5c4f7a32-2d43-4837-8229-89a7ff9c84ba                                                             |
+| Pulsar.dll SHA256     | 1c1a49dc957ade033bd60dca58db3cc2221bd71bab7a20ab4f5009e98f13ff29                                 |
+
+MITRE ATT&CK and Malware Behavior Catalog brought to you by [Mandiant Capa](https://github.com/mandiant/capa):
+[Capa Data](https://mandiant.github.io/capa/explorer/#/analysis?rdoc=https://raw.githubusercontent.com/W4llyw/Blog/refs/heads/main/Images/QuasarRAT/Pulsar_Capa.json)
