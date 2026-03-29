@@ -1,11 +1,12 @@
 # Family Matters from Quasar to Pulsar
 
 
-I was looking for my next journey into malware analysis and this time around I decided to take a look at QuasarRat. It's a .net based RAT that is a bit more complicated than AsyncRAT and seemed to have been favored by Advanced Persistent Threats (APT) based out of china for awhile. According to an article posted by [Huntress](https://www.huntress.com/threat-library/threat-actors/apt10) parts of the APT (APT10) group were indicted in 2018. This made me interested in why or who is still using it today and possibly exposing their infrastructure, lets see what we can find out.
+I was looking for my next journey into malware analysis, wanted to try something a bit more complex, and decided to take a look at Quasar Rat. It's a .net based RAT that is a bit more complicated than AsyncRAT and is typically highly obfuscated. Quasar RAT seemed to have been favored by Advanced Persistent Threats (APT) based out of china for awhile. 
+According to an article by [Huntress](https://www.huntress.com/threat-library/threat-actors/apt10) Quasar RAT was used by APT10 a state sponsored group based out of China. The article also goes on to explain that parts of APT10 ended up being indicted in 2018 by the U.S. Department of Justice. This made me interested in who or why is still using it today and possibly exposing their infrastructure, lets see what we can find out.
 
 
 ### Finding the sample
-As usual getting malware from the internet is never difficult. By using MalwareBazaar's search syntax `signature:QuasarRAT` I pulled up all the posted malware with the QuasarRAT signature. Since it was sorted by latest posted I chose the first one that showed up and just went for it.
+As usual getting malware from the internet is never difficult. By using MalwareBazaar's search syntax `signature:QuasarRAT` I pulled up all the posted malware with the QuasarRAT signature. The results were sorted by most recently posted so I decided to choose the first one that showed up and just go for it.
 
 **Take Caution When Downloading From Any Site That Hosts Malware as These Are Live Samples**
 
@@ -13,11 +14,11 @@ As usual getting malware from the internet is never difficult. By using MalwareB
 
 
 ### An Initial look
-Detect It Easy (DIE) confirms that it is a .net application, and mentions that it's packed in the initial scan.
+Detect It Easy (DIE) confirms that it is a .net application, and mentions that the data is packed with high entropy (randomness) in the initial scan.
 
 ![DIE](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/DIE.png)
 
-DIE will also show you just how packed the malware is by displaying its entropy (randomness).
+DIE will also provides a visualization of just how packed or obfuscated an application is via a graph for entropy ranging from 0-8 and packing percentage near the top.
 
 ![Entropy](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/DIE%20Entropy.png)
 
@@ -26,22 +27,22 @@ Lets take a look at PEStudio to see if some of the imports can tell me anything.
 
 ![PeStudio](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Low%20Imports.png)
 
-...5. There are 5 imports. And they didn't seem to stand out much, I mean `GetCurrentThread` could possibly be something but on its own not likely. I looked up the MiniDump api and it could be used for credential theft or information gathering, but the low amount of imports definitely means heavy obfuscation.
+...5. There are only 5 flagged imports. And they don't seem to be anything that outstanding, I mean `GetCurrentThread` could possibly be something but on its own not likely. I looked up the MiniDump api and it could be used for credential theft or information gathering, but the low amount of imports definitely means heavy obfuscation or that import calls are built during runtime.
 
 
 ### Diving in
-Ok time to get into this thing and see just how obfuscated this thing is.
+Ok lets throw this thing into dnSpy and see just how complicated this thing is.
 
 ![Chinese](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Heavy%20Obfuscation%20and%20Chinese.png)
 
-It's very obfuscated and in Chinese...
+It's not just obfuscated but also in Chinese...
 
-I needed to find something that can deobfuscate this for me so I can at least start figuring things out. I have heard of [De4dot](https://github.com/de4dot/de4dot) for deobfuscation and found that it was already part of FlareVM so decided to throw it at De4dot.
-De4dot came back with "Detected Unknown Obfuscator", this made me wonder if the use of Chinese is throwing it off.
+I wanted to find something that can deobfuscate this for me so I can at least start figuring things out. I have heard of [De4dot](https://github.com/de4dot/de4dot) for deobfuscation and found that it was already part of FlareVM so decided to have De4dot take a look.
+De4dot came back with "Detected Unknown Obfuscator", but this may be because of the use of Chinese is throwing it off.
 
 ![De4dot](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/De4dot%20uknown.png)
 
-I did some more research into other .net deobfuscation tools and came across another .net deobfuscator and unpacker [NETReactorSlayer](https://github.com/SychicBoy/NETReactorSlayer?tab=readme-ov-file).I really need to go through all the installed tools on FlareVM because checking FlareVM and NETReactorSlayer is also already installed, but honestly who has the time for that.
+I did some more research into other .net deobfuscation tools and came across another .net deobfuscator and unpacker [NETReactorSlayer](https://github.com/SychicBoy/NETReactorSlayer?tab=readme-ov-file).I really need to go through all the installed tools on FlareVM because checking FlareVM NETReactorSlayer is also already installed, but honestly who has the time for that.
 Alright lets see what this thing can do, I checked all options and threw in the malware because why not.
 
 ![Slaying](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slaying.png)
@@ -54,7 +55,7 @@ Looking at the sample again in dnSpy it is no longer in Chinese, but still obfus
 
 ![English&Obfuscated](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/English%20but%20obfuscated.png)
 
-I wondered why the namespaces and classes were still gibberish after NetReactorSlayer had deobfuscated and unpacked it. And I am pretty sure it is due to code virtualization.Basically code virtualization converts your code into randomized instructions that are interpreted at runtime. This technique seems to be extremely difficult to reverse and most people just go with the crazy names or change them as they come across them. If you want to know more about code virtualization you can look [here](https://www.eziriz.com/help/definitions/code_virtualization/#example-usage).
+I wondered why the namespaces and classes were still gibberish after NetReactorSlayer had deobfuscated and unpacked it. And I am pretty sure it is due to code virtualization. Basically code virtualization converts your code into randomized instructions that are interpreted at runtime. This technique seems to be extremely difficult to reverse and most people just go with the crazy names or change them as they come across them. If you want to know more about code virtualization you can look [here](https://www.eziriz.com/help/definitions/code_virtualization/#example-usage).
 
 As you may have noticed in one of the earlier screenshots there are a lot of namespaces in this application.
 
@@ -74,11 +75,11 @@ I have been in this situation before and knew exactly what to do, set a break po
 
 ![Breakpoint](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Break%20Point%20set.png)
 
-With the breakpoint set I hit debug(`F5`) opened the static fields window and there it was. Instantly what looks like a C2 IP with port number and the name and location of where the malware runs from once executed.
+With the breakpoint set I hit debug(`F5`) opened the static fields window and there it was. Instantly what looks like a C2 IP with port number and the name and location of where the malware runs from once executed along with other configuration settings.
 
 ![The Reveal](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/The%20Reveal.png)
 
-We will see what all we can do with this info soon, but now I want to move on to see what all this thing is trying to do. After running up to the break point all the unpacked dlls are loaded. One that stuck out to me was called `Pulsar.Common.dll` once expanded, it looks like all the malicious functions of this malware come from this one dll.
+We will see what all we can do with this info soon, but now I want to move on to see what all this thing is trying to do. After running up to the break point all the unpacked dlls are also loaded. One that stuck out to me was called `Pulsar.Common.dll` once expanded, it looks like all the malicious functions of this malware come from this one dll.
 
 ![Pulsar1](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Pulsar.png)
 ![Pulsar2](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Pulsar2.png)
@@ -89,7 +90,7 @@ Looking at these namespaces you can clearly see that this thing is capable of ju
 
 
 ### Pulsar
-I was interested in why this Quasar RAT was exclusively using this Pulsar dll to perform just about any and everything that you can think of when it comes to malware. I did some digging and found out that Pulsar RAT belongs to the Quasar RAT family and first appeared in early 2025; which means the sample I found is a fairly newly crafted RAT! While I was poking around on the internet I came across this [gem](https://45734016.fs1.hubspotusercontent-na1.net/hubfs/45734016/Pulsar%20RAT%20Technical%20Malware%20Analysis%20Report.pdf) of an article where a researchers at ThreatMon got ahold of a PulsarRAT builder. Based off what they found what I am dealing with has got to be a Pulsar RAT.
+I was interested in why this Quasar RAT was exclusively using this Pulsar dll to perform just about any and everything that you can think of when it comes to malware. I did some digging and found out that Pulsar RAT belongs to the Quasar RAT family and first appeared in early 2025; which means the sample I found is a fairly newly crafted RAT! While I was poking around on the internet for more info I came across this [gem](https://45734016.fs1.hubspotusercontent-na1.net/hubfs/45734016/Pulsar%20RAT%20Technical%20Malware%20Analysis%20Report.pdf) of an article where researchers at ThreatMon got ahold of a PulsarRAT builder. Based off what they found what I am dealing with has got to be a Pulsar RAT.
 
 Some of the mentioned functions of the Pulsar RAT match the namespaces in my Pulsar dll.
 
@@ -105,11 +106,11 @@ Seems like the wallpaper change and hiding the taskbar was not part of a ransomw
 
 
 ### Some CTI
-Now lets see just where this C2 is going and if we can't cause them some issues. Using good ole Shodan it looks like the IP address points to VPS hosting service so most likely it is not located in St. Louis.
+Now lets see just where this C2 is going and if we can't cause them some issues. Using good ole Shodan it looks like the IP address points to VPS hosting service so most likely the threat actor is'nt actually located in St. Louis.
 
 ![Shodan](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Shodan.png)
 
-Searching the C2s IP in virus total shows only 13 vendors have marked it malicious with only one comment mentioning Quasar RAT.
+Searching the C2s IP in virus total shows only 13 out of 94 vendors have marked it malicious with only one comment mentioning Quasar RAT.
 
 ![VirusTotal](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/VirusTotal.png)
 
@@ -117,7 +118,7 @@ I also voted and commented on Virus Total so hopefully it will bring a little mo
 
 
 ### They grow up so fast
-From initially thinking this was an old malware being reborn to finding out that it was a much younger variant of its predecessor.Malware has yet to not surprise me, you think "oh this is a run of the mill RAT resurfacing" and it ends up being something new built from something old. From the heavy obfuscation to the use of Chinese I thought this was going to be a Quasar RAT through and through especially with the earlier references to the Chinese APT group. I get it unpacked an bam this thing was built about a year ago.
+From initially thinking this was old malware being reborn to finding out that it was a much younger variant of its predecessor.Malware has yet to not surprise me, you think "oh this is a run of the mill RAT resurfacing" and it ends up being something new built from something old. From the heavy obfuscation to the use of Chinese I thought this was going to be a Quasar RAT through and through especially with the earlier references to the Chinese APT group. I get it unpacked an bam a recently built variant of Quasar RAT that is probably keeping the Quasar family trending to this day.
 My next adventure may be another .Net app or a generic PE I am not sure yet as I am still learning assembly and how to properly analyze generic PE malware. If I go with another .Net app I will do more with renaming namespaces and classes for better readability, I feel like this is something I need to form a habit around.
 
 
