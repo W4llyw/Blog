@@ -2,6 +2,7 @@
 
 
 I was looking for my next journey into malware analysis, wanted to try something a bit more complex, and decided to take a look at Quasar Rat. It's a .net based RAT that is a bit more complicated than AsyncRAT and is typically highly obfuscated. Quasar RAT seemed to have been favored by Advanced Persistent Threats (APT) based out of china for awhile. 
+
 According to an article by [Huntress](https://www.huntress.com/threat-library/threat-actors/apt10) Quasar RAT was used by APT10 a state sponsored group based out of China. The article also goes on to explain that parts of APT10 ended up being indicted in 2018 by the U.S. Department of Justice. This made me interested in who or why is still using it today and possibly exposing their infrastructure, lets see what we can find out.
 
 
@@ -23,6 +24,7 @@ DIE will also provides a visualization of just how packed or obfuscated an appli
 ![Entropy](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/DIE%20Entropy.png)
 
 93%! Well I said I wanted something more obfuscated and complex.
+
 Lets take a look at PEStudio to see if some of the imports can tell me anything.
 
 ![PeStudio](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Low%20Imports.png)
@@ -38,11 +40,13 @@ Ok lets throw this thing into dnSpy and see just how complicated this thing is.
 It's not just obfuscated but also in Chinese...
 
 I wanted to find something that can deobfuscate this for me so I can at least start figuring things out. I have heard of [De4dot](https://github.com/de4dot/de4dot) for deobfuscation and found that it was already part of FlareVM so decided to have De4dot take a look.
+
 De4dot came back with "Detected Unknown Obfuscator", but this may be because of the use of Chinese is throwing it off.
 
 ![De4dot](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/De4dot%20uknown.png)
 
 I did some more research into other .net deobfuscation tools and came across another .net deobfuscator and unpacker [NETReactorSlayer](https://github.com/SychicBoy/NETReactorSlayer?tab=readme-ov-file).I really need to go through all the installed tools on FlareVM because checking FlareVM NETReactorSlayer is also already installed, but honestly who has the time for that.
+
 Alright lets see what this thing can do, I checked all options and threw in the malware because why not.
 
 ![Slaying](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/Slaying.png)
@@ -55,7 +59,9 @@ Looking at the sample again in dnSpy it is no longer in Chinese, but still obfus
 
 ![English&Obfuscated](https://github.com/W4llyw/Blog/blob/main/Images/QuasarRAT/English%20but%20obfuscated.png)
 
-I wondered why the namespaces and classes were still gibberish after NetReactorSlayer had deobfuscated and unpacked it. And I am pretty sure it is due to code virtualization. Basically code virtualization converts your code into randomized instructions that are interpreted at runtime. This technique seems to be extremely difficult to reverse and most people just go with the crazy names or change them as they come across them. If you want to know more about code virtualization you can look [here](https://www.eziriz.com/help/definitions/code_virtualization/#example-usage).
+I wondered why the namespaces and classes were still gibberish after NetReactorSlayer had deobfuscated and unpacked it. And I am pretty sure it is due to code virtualization. Basically code virtualization converts your code into randomized instructions that are interpreted at runtime. This technique seems to be extremely difficult to reverse and most people just go with the crazy names or change them as they come across them. 
+
+If you want to know more about code virtualization you can look [here](https://www.eziriz.com/help/definitions/code_virtualization/#example-usage).
 
 As you may have noticed in one of the earlier screenshots there are a lot of namespaces in this application.
 
@@ -119,6 +125,7 @@ I also voted and commented on Virus Total so hopefully it will bring a little mo
 
 ### They grow up so fast
 From initially thinking this was old malware being reborn to finding out that it was a much younger variant of its predecessor.Malware has yet to not surprise me, you think "oh this is a run of the mill RAT resurfacing" and it ends up being something new built from something old. From the heavy obfuscation to the use of Chinese I thought this was going to be a Quasar RAT through and through especially with the earlier references to the Chinese APT group. I get it unpacked an bam a recently built variant of Quasar RAT that is probably keeping the Quasar family trending to this day.
+
 My next adventure may be another .Net app or a generic PE I am not sure yet as I am still learning assembly and how to properly analyze generic PE malware. If I go with another .Net app I will do more with renaming namespaces and classes for better readability, I feel like this is something I need to form a habit around.
 
 
