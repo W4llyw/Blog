@@ -1,0 +1,163 @@
+┌─────────────┬────────────────────────────────────────────────────────────────────────────────────┐
+│ md5         │ 49fa895cb3111668c35600c0f83c9adb                                                   │
+│ sha1        │ 8af00448033a11ed460e3d47f8c3d08021008cb2                                           │
+│ sha256      │ e4d6c94e315a3a5dc3f902b12011e9c5d501c347c5d0922dd88e8d1dd11e88a5                   │
+│ analysis    │ static                                                                             │
+│ os          │ any                                                                                │
+│ format      │ dotnet                                                                             │
+│ arch        │ any                                                                                │
+│ path        │ C:/Users/malware/Documents/Samples/Xworm/loader.exe                                │
+└─────────────┴────────────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────┬───────────────────────────────────────────────────────────────────────────────────┐
+│ ATT&CK Tactic        │ ATT&CK Technique                                                                  │
+├──────────────────────┼───────────────────────────────────────────────────────────────────────────────────┤
+│ COLLECTION           │ Archive Collected Data::Archive via Library [T1560.002]                           │
+│                      │ Clipboard Data [T1115]                                                            │
+│                      │ Data from Information Repositories [T1213]                                        │
+│                      │ Input Capture::Keylogging [T1056.001]                                             │
+│                      │ Screen Capture [T1113]                                                            │
+│ DEFENSE EVASION      │ Deobfuscate/Decode Files or Information [T1140]                                   │
+│                      │ Indicator Removal::File Deletion [T1070.004]                                      │
+│                      │ Modify Registry [T1112]                                                           │
+│                      │ Obfuscated Files or Information [T1027]                                           │
+│                      │ Reflective Code Loading [T1620]                                                   │
+│                      │ Virtualization/Sandbox Evasion::System Checks [T1497.001]                         │
+│ DISCOVERY            │ Account Discovery [T1087]                                                         │
+│                      │ File and Directory Discovery [T1083]                                              │
+│                      │ Process Discovery [T1057]                                                         │
+│                      │ Query Registry [T1012]                                                            │
+│                      │ Software Discovery [T1518]                                                        │
+│                      │ System Information Discovery [T1082]                                              │
+│                      │ System Location Discovery::System Language Discovery [T1614.001]                  │
+│                      │ System Owner/User Discovery [T1033]                                               │
+│ EXECUTION            │ Windows Management Instrumentation [T1047]                                        │
+│ PERSISTENCE          │ Boot or Logon Autostart Execution::Registry Run Keys / Startup Folder [T1547.001] │
+│                      │ Scheduled Task/Job::Scheduled Task [T1053.005]                                    │
+└──────────────────────┴───────────────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────┬──────────────────────────────────┐
+│ MAEC Category                                                 │ MAEC Value                       │
+├───────────────────────────────────────────────────────────────┼──────────────────────────────────┤
+│ malware-category                                              │ downloader                       │
+│                                                               │ launcher                         │
+└───────────────────────────────────────────────────────────────┴──────────────────────────────────┘
+┌──────────────────────────┬──────────────────────────────────────────────────────────────────────────┐
+│ MBC Objective            │ MBC Behavior                                                             │
+├──────────────────────────┼──────────────────────────────────────────────────────────────────────────┤
+│ ANTI-BEHAVIORAL ANALYSIS │ Debugger Detection::CheckRemoteDebuggerPresent [B0001.002]               │
+│                          │ Debugger Detection::WudfIsAnyDebuggerPresent [B0001.031]                 │
+│                          │ Sandbox Detection [B0007]                                                │
+│                          │ Virtual Machine Detection [B0009]                                        │
+│ COLLECTION               │ Keylogging::Polling [F0002.002]                                          │
+│                          │ Screen Capture::WinAPI [E1113.m01]                                       │
+│ COMMAND AND CONTROL      │ C2 Communication::Receive Data [B0030.002]                               │
+│                          │ C2 Communication::Send Data [B0030.001]                                  │
+│ COMMUNICATION            │ DNS Communication::Resolve [C0011.001]                                   │
+│                          │ HTTP Communication [C0002]                                               │
+│                          │ HTTP Communication::Create Request [C0002.012]                           │
+│                          │ HTTP Communication::Download URL [C0002.006]                             │
+│                          │ HTTP Communication::Get Response [C0002.017]                             │
+│                          │ HTTP Communication::Send Request [C0002.003]                             │
+│                          │ Socket Communication::Create TCP Socket [C0001.011]                      │
+│                          │ Socket Communication::Create UDP Socket [C0001.010]                      │
+│                          │ Socket Communication::Receive Data [C0001.006]                           │
+│                          │ Socket Communication::Send Data [C0001.007]                              │
+│ CRYPTOGRAPHY             │ Cryptographic Hash::MD5 [C0029.001]                                      │
+│                          │ Generate Pseudo-random Sequence::Use API [C0021.003]                     │
+│ DATA                     │ Compress Data [C0024]                                                    │
+│                          │ Decode Data::Base64 [C0053.001]                                          │
+│                          │ Encode Data::Base64 [C0026.001]                                          │
+│ DEFENSE EVASION          │ Obfuscated Files or Information::Encoding-Standard Algorithm [E1027.m02] │
+│                          │ Self Deletion::COMSPEC Environment Variable [F0007.001]                  │
+│ DISCOVERY                │ Application Window Discovery [E1010]                                     │
+│                          │ File and Directory Discovery [E1083]                                     │
+│                          │ System Information Discovery [E1082]                                     │
+│ FILE SYSTEM              │ Create Directory [C0046]                                                 │
+│                          │ Delete File [C0047]                                                      │
+│                          │ Read File [C0051]                                                        │
+│                          │ Writes File [C0052]                                                      │
+│ IMPACT                   │ Clipboard Modification [E1510]                                           │
+│ OPERATING SYSTEM         │ Registry::Delete Registry Key [C0036.002]                                │
+│                          │ Registry::Delete Registry Value [C0036.007]                              │
+│                          │ Registry::Query Registry Key [C0036.005]                                 │
+│                          │ Registry::Query Registry Value [C0036.006]                               │
+│                          │ Registry::Set Registry Key [C0036.001]                                   │
+│ PERSISTENCE              │ Registry Run Keys / Startup Folder [F0012]                               │
+│ PROCESS                  │ Create Mutex [C0042]                                                     │
+│                          │ Create Process [C0017]                                                   │
+│                          │ Create Thread [C0038]                                                    │
+│                          │ Suspend Thread [C0055]                                                   │
+│                          │ Terminate Process [C0018]                                                │
+└──────────────────────────┴──────────────────────────────────────────────────────────────────────────┘
+┌───────────────────────────────────────────────────────────────────┬─────────────────────────────────────────────────┐
+│ Capability                                                        │ Namespace                                       │
+├───────────────────────────────────────────────────────────────────┼─────────────────────────────────────────────────┤
+│ check for sandbox and av modules                                  │ anti-analysis/anti-av                           │
+│ check for debugger via API                                        │ anti-analysis/anti-debugging/debugger-detection │
+│ self delete (2 matches)                                           │ anti-analysis/anti-forensic/self-deletion       │
+│ reference anti-VM strings targeting VMWare                        │ anti-analysis/anti-vm/vm-detection              │
+│ reference anti-VM strings targeting VirtualBox                    │ anti-analysis/anti-vm/vm-detection              │
+│ save image in .NET                                                │ collection                                      │
+│ reference WMI statements                                          │ collection/database/wmi                         │
+│ log keystrokes                                                    │ collection/keylog                               │
+│ log keystrokes via polling (2 matches)                            │ collection/keylog                               │
+│ capture screenshot                                                │ collection/screenshot                           │
+│ send data (3 matches)                                             │ communication                                   │
+│ receive and write data from server to client                      │ communication/c2/file-transfer                  │
+│ resolve DNS                                                       │ communication/dns                               │
+│ reference HTTP User-Agent string                                  │ communication/http                              │
+│ send HTTP request with Host header                                │ communication/http                              │
+│ set HTTP User-Agent in .NET                                       │ communication/http                              │
+│ create HTTP request                                               │ communication/http/client                       │
+│ compress data using GZip in .NET (2 matches)                      │ data-manipulation/compression                   │
+│ decode data using Base64 in .NET (3 matches)                      │ data-manipulation/encoding/base64               │
+│ encode data using Base64                                          │ data-manipulation/encoding/base64               │
+│ hash data with MD5 (4 matches)                                    │ data-manipulation/hashing/md5                   │
+│ generate random numbers in .NET (6 matches)                       │ data-manipulation/prng                          │
+│ find data using regex in .NET (3 matches)                         │ data-manipulation/regex                         │
+│ monitor clipboard content                                         │ host-interaction/clipboard                      │
+│ read clipboard data                                               │ host-interaction/clipboard                      │
+│ write clipboard data                                              │ host-interaction/clipboard                      │
+│ query environment variable                                        │ host-interaction/environment-variable           │
+│ generate random filename in .NET                                  │ host-interaction/file-system                    │
+│ get common file path (2 matches)                                  │ host-interaction/file-system                    │
+│ create directory                                                  │ host-interaction/file-system/create             │
+│ delete file                                                       │ host-interaction/file-system/delete             │
+│ check if directory exists                                         │ host-interaction/file-system/exists             │
+│ check if file exists (2 matches)                                  │ host-interaction/file-system/exists             │
+│ read file on Windows (2 matches)                                  │ host-interaction/file-system/read               │
+│ write file on Windows (4 matches)                                 │ host-interaction/file-system/write              │
+│ set application hook                                              │ host-interaction/gui                            │
+│ get graphical window text                                         │ host-interaction/gui/window/get-text            │
+│ get number of processors                                          │ host-interaction/hardware/cpu                   │
+│ get keyboard layout                                               │ host-interaction/hardware/keyboard              │
+│ get disk size                                                     │ host-interaction/hardware/storage               │
+│ manipulate unmanaged memory in .NET (2 matches)                   │ host-interaction/memory                         │
+│ create or open mutex on Windows                                   │ host-interaction/mutex                          │
+│ get hostname (2 matches)                                          │ host-interaction/os/hostname                    │
+│ get OS version in .NET (3 matches)                                │ host-interaction/os/version                     │
+│ get process image filename                                        │ host-interaction/process                        │
+│ create a process with modified I/O handles and window (4 matches) │ host-interaction/process/create                 │
+│ create process on Windows (6 matches)                             │ host-interaction/process/create                 │
+│ enumerate processes                                               │ host-interaction/process/list                   │
+│ find process by PID                                               │ host-interaction/process/list                   │
+│ enter debug mode in .NET                                          │ host-interaction/process/modify                 │
+│ terminate process (4 matches)                                     │ host-interaction/process/terminate              │
+│ query or enumerate registry key (2 matches)                       │ host-interaction/registry                       │
+│ query or enumerate registry value                                 │ host-interaction/registry                       │
+│ delete registry key                                               │ host-interaction/registry/delete                │
+│ delete registry value                                             │ host-interaction/registry/delete                │
+│ get session integrity level                                       │ host-interaction/session                        │
+│ get session user name (3 matches)                                 │ host-interaction/session                        │
+│ create thread (5 matches)                                         │ host-interaction/thread/create                  │
+│ suspend thread (7 matches)                                        │ host-interaction/thread/suspend                 │
+│ execute via timer in .NET                                         │ host-interaction/thread/timer                   │
+│ access WMI data in .NET (2 matches)                               │ host-interaction/wmi                            │
+│ get .NET assembly entry point                                     │ load-code/dotnet                                │
+│ invoke .NET assembly method                                       │ load-code/dotnet                                │
+│ load .NET assembly (2 matches)                                    │ load-code/dotnet                                │
+│ persist via Run registry key (2 matches)                          │ persistence/registry/run                        │
+│ schedule task via schtasks (4 matches)                            │ persistence/scheduled-tasks                     │
+│ unmanaged call (14 matches)                                       │ runtime                                         │
+│ compiled to the .NET platform                                     │ runtime/dotnet                                  │
+└───────────────────────────────────────────────────────────────────┴─────────────────────────────────────────────────┘
+
